@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+
+	RewriteRule ^panel /kirby/panel [L]
+	RewriteRule ^panel/(.*)$ /kirby/panel/$1 [L]
+	RewriteRule ^200\.html$ - [L]
+
+	# Serve static files or directories as-is
+	RewriteCond %{REQUEST_FILENAME} -f [OR]
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteRule ^ - [L]
+	
+	RewriteRule . /200.html [L]
+	
+</IfModule>
