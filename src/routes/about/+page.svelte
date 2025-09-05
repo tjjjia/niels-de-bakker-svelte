@@ -21,12 +21,10 @@
 					</li>
 				{/each}
 			</ul>
+			<div class="address">
+				{@html data.address}
+			</div>
 		</div>
-		<div class="address">
-			{@html data.address}
-		</div>
-		<div class="gallery">
-			(gallery)
-		</div>
+		<div class="gallery">(gallery)</div>
 	</div>
 </main>

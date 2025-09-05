@@ -9,7 +9,7 @@
 		content: {
 			caption: "",
 			crop: false,
-			ratio: "auto",
+			ratio: "auto"
 		},
 		id: "",
 		isHidden: false,
@@ -20,10 +20,7 @@
 </script>
 
 {#if !block.isHidden}
-	<figure
-		data-ratio={ratio}
-		data-crop={crop}
-	>
+	<figure data-ratio={ratio} data-crop={crop}>
 		<ul>
 			{#each images as image}
 				<li><img src={image} alt="" /></li>

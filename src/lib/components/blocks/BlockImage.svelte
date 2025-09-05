@@ -7,21 +7,20 @@
 
 	export let block = {
 		content: {
-			alt: '',
-			caption: '',
-			crop: '',
-			link: '',
-			ratio: '',
+			alt: "",
+			caption: "",
+			crop: "",
+			link: "",
+			ratio: "",
 			src: null,
 			srcset: null
 		},
-		id: '',
+		id: "",
 		isHidden: true,
-		type: 'heading'
+		type: "image"
 	};
 
 	const { alt, caption, crop, link, ratio, src, srcset } = block.content;
-
 </script>
 
 {#if !block.isHidden}

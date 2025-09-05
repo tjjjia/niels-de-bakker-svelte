@@ -1,7 +1,5 @@
 <script>
 	let { path } = $props();
-
-	console.log(path);
 </script>
 
 <nav id="menu--pages" class="menu">

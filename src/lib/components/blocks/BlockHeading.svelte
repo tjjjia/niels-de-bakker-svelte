@@ -16,9 +16,6 @@
 	};
 
 	const { level, text } = block.content;
-
-	console.log( block);
-
 </script>
 
 {#if !block.isHidden}

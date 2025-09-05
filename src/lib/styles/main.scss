@@ -187,13 +187,20 @@ nav a,
   }
 }
 
-li.article:hover {
-  text-indent: 1rem;
-  .background-image {
-    animation: fadeInMask 0.3s cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
-  }
-}
+// li.article:hover {
+//   text-indent: 1rem;
+//   .background-image {
+//     animation: fadeInMask 0.3s cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
+//   }
+// }
 
-li.article:not(hover) > .background-image {
-  animation: fadeOutMask 0.3s cubic-bezier(0.66, 0, 0.34, 1) forwards;
+// li.article:not(hover) > .background-image {
+//   animation: fadeOutMask 0.3s cubic-bezier(0.66, 0, 0.34, 1) forwards;
+// }
+
+
+pre.debug {
+  background-color: orangered;
+  color: white;
+  font-size: .85rem;
 }
