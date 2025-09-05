@@ -2,15 +2,17 @@
 	/** @type {import('./$types').PageProps} */
 	let { data } = $props();
 
-	const projects = data.projects.projects;
-	console.log(projects);
+	const projects = data.projects;
+	console.log(data);
 </script>
 
-<h1>Projects</h1>
-<ol>
-	{#each projects as project}
-		<li>
-			{project.title}
-		</li>
-	{/each}
-</ol>
+<main class="page--projects">
+	<ul class="projects--list">
+		{#each projects as project}
+			<li class="article">
+				<a href={project.id} title={project.title}>{project.title}</a>
+				<img class="background-image" src={project.cover.thumbnail} alt={project.cover.alt} />
+			</li>
+		{/each}
+	</ul>
+</main>

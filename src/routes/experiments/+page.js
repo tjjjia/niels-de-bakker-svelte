@@ -6,7 +6,7 @@ import { PUBLIC_KIRBY_DOMAIN } from '$env/static/public';
 
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ params }) {
-	const url = `${PUBLIC_KIRBY_DOMAIN}/projects.json`;
+	const url = `${PUBLIC_KIRBY_DOMAIN}/experiments.json`;
 
 	const response = await fetch(url);
 	if (!response.ok) {

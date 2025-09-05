@@ -1,7 +1,16 @@
 <script>
 	import favicon from '$lib/assets/favicon.svg';
 
-	import Navigation from "../components/Navigation.svelte";
+	import { page } from '$app/stores';
+	import { afterNavigate } from "$app/navigation";
+
+	let path = $state($page.url.pathname);
+	afterNavigate(() => {
+		path = $page.url.pathname;
+	});
+
+	import '$lib/styles/main.scss';
+	import Navigation from '$lib/components/Navigation.svelte';
 
 	let { children } = $props();
 </script>
@@ -10,6 +19,6 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<Navigation />
+<Navigation {path} />
 
 {@render children?.()}
