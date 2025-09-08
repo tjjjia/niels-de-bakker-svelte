@@ -6,28 +6,21 @@
 	*/
 
 	export let block = {
-		content: {
-			caption: "",
-			crop: false,
-			ratio: "auto"
-		},
+		content: [],
 		id: "",
 		isHidden: false,
 		type: "gallery"
 	};
 
-	const { caption, crop, ratio, images, logos } = block.content;
+	const images = block.content;
 </script>
 
 {#if !block.isHidden}
-	<figure data-ratio={ratio} data-crop={crop}>
+	<figure>
 		<ul>
 			{#each images as image}
-				<li><img src={image} alt="" /></li>
+				<li><img src={image.src} alt={image.alt} srcset={image.srcset} /></li>
 			{/each}
 		</ul>
-		{#if caption}
-			<figcaption>{caption}</figcaption>
-		{/if}
 	</figure>
 {/if}

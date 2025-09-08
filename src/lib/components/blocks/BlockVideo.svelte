@@ -24,7 +24,12 @@
 	};
 
 	let url = block.content.url;
+	let src;
+	const isVimeo = url.toLowerCase().includes("vimeo");
+	const isYoutube = url.toLowerCase().includes("youtu");
+
 	let attrs = {};
+	let query;
 
 	if (block.content.location === "kirby" && block.content.video) {
 		url = block.content.video; // URL is already resolved in JSON output
@@ -37,18 +42,42 @@
 			poster: block.content.poster || undefined,
 			preload: block.content.preload
 		};
-	}
+	} else if (block.content.location === "web") {
+		if (isVimeo === true) {
+			const match = url.match(/vimeo\.com\/(\d+)/);
+			block.content.video = match ? match[1] : null;
 
-	console.log(url, attrs);
+			query = new URLSearchParams({
+				autoplay: block.content.autoplay ? "1" : "0",
+				controls: block.content.controls ? "1" : "0",
+				loop: block.content.loop ? "1" : "0",
+				muted: block.content.muted ? "1" : "0",
+				playsinline: block.content.playsinline ? "1" : "0"
+			});
+
+			src = `https://player.vimeo.com/video/${block.content.video}?${query.toString()}`;
+		} else if (isYoutube === true) {
+			block.content.video = url.match(
+				/^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
+			);
+		}
+	}
 </script>
 
 {#if !block.isHidden && url}
 	<section class="block">
 		<figure>
-			{url}
-			muted: {block.content.muted}
-			autoplay: {block.content.autoplay}
-			controls: {block.content.controls}
+			{#if isVimeo}
+				<iframe
+					{src}
+					frameborder="0"
+					allow="autoplay; fullscreen; picture-in-picture"
+					allowfullscreen
+					title={block.content.caption || "Vimeo video"}
+				></iframe>
+			{:else if isYoutube}
+				unsupported video provider
+			{/if}
 			<figcaption>{block.content.caption}</figcaption>
 		</figure>
 	</section>

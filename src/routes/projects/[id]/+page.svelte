@@ -16,4 +16,7 @@
 
 <main class="project--content">
 	<KirbyLayout layouts={data.content} />
+	{#if data.footnotes}
+		{@html data.footnotes}
+	{/if}
 </main>
