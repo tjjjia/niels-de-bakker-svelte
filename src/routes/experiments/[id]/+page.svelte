@@ -4,10 +4,16 @@
 
 	import { PUBLIC_KIRBY_DOMAIN } from "$env/static/public";
 	
+	import CloseButton from "$lib/components/CloseButton.svelte";
 	import KirbyLayout from "$lib/components/KirbyLayout.svelte";
 </script>
 
-<h1>{data.title}</h1>
+<header class="experiment--header">
+	<h1>{data.title}</h1>
+	<CloseButton href="/experiments" title="Back to Experiments" />
+</header>
+
 <main class="experiment--content">
 	<KirbyLayout layouts={data.content} />
 </main>
+

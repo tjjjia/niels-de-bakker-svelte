@@ -5,64 +5,65 @@
 /* GENERAL */
 
 body {
-  padding: 1rem;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--bg);
-  color: var(--fg);
-  transition: background-color 0.8s, color 0.8s;
+	font-family: var(--font-sans);
+	background-color: var(--bg);
+	color: var(--fg);
+	transition:
+		background-color 0.8s,
+		color 0.8s;
 }
 
 /* BODY ANIMATION */
 
 body:has(.menu--item#projects a[aria-current="page"]) {
-  --bg: var(--projects-bg);
-  --fg: var(--projects-fg);
+	--bg: var(--projects-bg);
+	--fg: var(--projects-fg);
 }
 body:has(.menu--item#about a[aria-current="page"]) {
-  --bg: var(--about-bg);
-  --fg: var(--about-fg);
+	--bg: var(--about-bg);
+	--fg: var(--about-fg);
 }
 body:has(.menu--item#experiments a[aria-current="page"]) {
-  --bg: var(--experiments-bg);
-  --fg: var(--experiments-fg);
+	--bg: var(--experiments-bg);
+	--fg: var(--experiments-fg);
 }
 
 /* === hover colors (override current) === */
 body:has(.menu--item#projects:hover a) {
-  --bg: var(--projects-bg);
-  --fg: var(--projects-fg);
+	--bg: var(--projects-bg);
+	--fg: var(--projects-fg);
 }
 body:has(.menu--item#about:hover a) {
-  --bg: var(--about-bg);
-  --fg: var(--about-fg);
+	--bg: var(--about-bg);
+	--fg: var(--about-fg);
 }
 body:has(.menu--item#experiments:hover a) {
-  --bg: var(--experiments-bg);
-  --fg: var(--experiments-fg);
+	--bg: var(--experiments-bg);
+	--fg: var(--experiments-fg);
 }
 
 main,
 nav {
-  position: relative;
+	position: relative;
+	padding: 1rem;
 }
 
 /* NAVIGATION */
 
 nav {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 main {
-  font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 nav {
-  margin-bottom: 1rem;
-  ul {
-    display: flex;
-    justify-content: space-between;
-  }
-  /* #projects a,
+	margin-bottom: 1rem;
+	ul {
+		display: flex;
+		justify-content: space-between;
+	}
+	/* #projects a,
   #experiments a {
     display: block;
     text-underline-offset: 0.5rem;
@@ -81,117 +82,122 @@ nav {
 }
 
 nav ul {
-  transition: transform 0.3s ease;
-  transform: rotateX(0deg);
+	transition: transform 0.3s ease;
+	transform: rotateX(0deg);
 }
 
 nav a {
-  display: inline-block;
-  transform: rotateX(180deg);
-  transition: transform 0.3s ease;
+	display: inline-block;
+	transform: rotateX(180deg);
+	transition: transform 0.3s ease;
 }
 
 nav a[aria-current="page"] {
-  transform: rotateX(0deg);
+	transform: rotateX(0deg);
 }
 
 nav li:first-child,
-.projects--list {
-  font-family: "Courier New", Courier, monospace;
+.projects--list,
+.preview {
+	font-family: var(--font-mono);
 }
 
 nav a,
 .article a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 #about {
-  align-self: center;
-  display: flex;
+	align-self: center;
+	display: flex;
 }
 .dot {
-  height: 1rem;
-  width: 1rem;
-  background-color: transparent;
-  border: 1px solid var(--fg);
-  border-radius: 50%;
-  display: flex;
+	height: 1rem;
+	width: 1rem;
+	background-color: transparent;
+	border: 1px solid var(--fg);
+	border-radius: 50%;
+	display: flex;
 }
 
+/* PROJECT/EXPERIMENT PAGES */
+.project--header,
+.experiment--header {
+	position: relative;
+}
 /* GRID */
 .grid {
-  display: grid;
-  margin-bottom: 1rem;
-  gap: 1rem;
+	display: grid;
+	margin-bottom: 1rem;
+	gap: 1rem;
 }
 
 .auto-cols {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 1rem;
 }
 
-
 @media screen and (min-width: 60rem) {
-  .grid {
-    grid-template-columns: repeat(12, 1fr);
-  }
-  .grid > .column {
-    grid-column: span var(--span);
-  }
+	.grid {
+		grid-template-columns: repeat(12, 1fr);
+	}
+	.grid > .column {
+		grid-column: span var(--span);
+	}
 }
 
 .article {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 
 /* PROJETS BACKGROUND */
 .background-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(20px) contrast(1);
-  transform: scale(1.1);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: blur(20px) contrast(1);
+	transform: scale(1.1);
 
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-position: left;
+	-webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+	-webkit-mask-position: left;
 
-  z-index: -10;
-  opacity: 0;
+	z-index: -10;
+	opacity: 0;
 }
 
 @keyframes fadeInMask {
-  from {
-    opacity: 0;
-    z-index: -10;
-    filter: blur(20px);
-    transform: translateX(0rem) scale(1.1);
-  }
-  to {
-    opacity: 1;
-    z-index: -1;
-    filter: blur(20px);
-    transform: translateX(0rem) scale(1.1);
-  }
+	from {
+		opacity: 0;
+		z-index: -10;
+		filter: blur(20px);
+		transform: translateX(0rem) scale(1.1);
+	}
+	to {
+		opacity: 1;
+		z-index: -1;
+		filter: blur(20px);
+		transform: translateX(0rem) scale(1.1);
+	}
 }
 
 @keyframes fadeOutMask {
-  from {
-    opacity: 1;
-    z-index: -1;
-    transform: translateX(0rem) scale(1.1);
-  }
-  to {
-    opacity: 0;
-    z-index: -10;
-    transform: translateX(0rem) scale(1.1);
-  }
+	from {
+		opacity: 1;
+		z-index: -1;
+		transform: translateX(0rem) scale(1.1);
+	}
+	to {
+		opacity: 0;
+		z-index: -10;
+		transform: translateX(0rem) scale(1.1);
+	}
 }
 
 // li.article:hover {
@@ -208,29 +214,28 @@ nav a,
 /* MEDIA */
 /* Photoswipe captions */
 .pswp__custom-caption {
-  background: rgba(75, 150, 75, 0.75);
-  font-size: 16px;
-  color: #fff;
-  width: calc(100% - 32px);
-  max-width: 400px;
-  padding: 2px 8px;
-  border-radius: 4px;
-  position: absolute;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
+	background: rgba(75, 150, 75, 0.75);
+	font-size: 16px;
+	color: #fff;
+	width: calc(100% - 32px);
+	max-width: 400px;
+	padding: 2px 8px;
+	border-radius: 4px;
+	position: absolute;
+	left: 50%;
+	bottom: 16px;
+	transform: translateX(-50%);
 }
 .pswp__custom-caption a {
-  color: #fff;
-  text-decoration: underline;
+	color: #fff;
+	text-decoration: underline;
 }
 .hidden-caption-content {
-  display: none;
+	display: none;
 }
 
-
 pre.debug {
-  background-color: orangered;
-  color: white;
-  font-size: .85rem;
+	background-color: orangered;
+	color: white;
+	font-size: 0.85rem;
 }
