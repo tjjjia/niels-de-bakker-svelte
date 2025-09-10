@@ -8,9 +8,11 @@
 		content: [],
 		id: "",
 		isHidden: false,
-		type: "gallery"
+		type: "gallery",
+		caption: ""
 	};
 
+	const caption = block.caption;
 	const images = block.content;
 	const crop = images[0].crop ?? false;
 	const ratio = images[0].ratio ?? "auto";
@@ -85,5 +87,9 @@
 				</div>
 			{/each}
 		</div>
+
+		{#if caption}
+			<figcaption>{caption}</figcaption>
+		{/if}
 	</figure>
 {/if}

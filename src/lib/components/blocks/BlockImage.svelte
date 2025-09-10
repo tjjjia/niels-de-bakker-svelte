@@ -101,10 +101,3 @@
 		</figure>
 	</section>
 {/if}
-
-<style>
-	figure {
-		display: flex;
-		justify-content: center;
-	}
-</style>
