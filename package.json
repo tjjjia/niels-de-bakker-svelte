@@ -18,10 +18,12 @@
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"sass": "^1.92.0",
+		"sass-embedded": "^1.92.1",
 		"svelte": "^5.0.0",
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
-		"gsap": "^3.13.0"
+		"gsap": "^3.13.0",
+		"photoswipe": "^5.4.4"
 	}
 }

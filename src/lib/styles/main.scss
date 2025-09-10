@@ -126,6 +126,13 @@ nav a,
   gap: 1rem;
 }
 
+.auto-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+
 @media screen and (min-width: 60rem) {
   .grid {
     grid-template-columns: repeat(12, 1fr);
@@ -197,6 +204,29 @@ nav a,
 // li.article:not(hover) > .background-image {
 //   animation: fadeOutMask 0.3s cubic-bezier(0.66, 0, 0.34, 1) forwards;
 // }
+
+/* MEDIA */
+/* Photoswipe captions */
+.pswp__custom-caption {
+  background: rgba(75, 150, 75, 0.75);
+  font-size: 16px;
+  color: #fff;
+  width: calc(100% - 32px);
+  max-width: 400px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+}
+.pswp__custom-caption a {
+  color: #fff;
+  text-decoration: underline;
+}
+.hidden-caption-content {
+  display: none;
+}
 
 
 pre.debug {
