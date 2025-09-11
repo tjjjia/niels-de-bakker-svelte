@@ -4,34 +4,46 @@
 
 	const projects = data.projects;
 
-	import { preview, setPreview, pushPreview, clearPreview } from "$lib/preview.svelte.js";
+	let previewProject = $state();
+	let previewImageElement = $state();
+	import gsap from "gsap";
+	import { blur } from "svelte/transition";
 
-	let hoverTimeout;
-
-	function delayedPreview(src) {
-		hoverTimeout = setTimeout(() => {
-			console.log("timeout passed!")
-			pushPreview(src);
-		}, 80);
+	function preview(project) {
+		previewImageElement.src = project.cover.src;
+		previewImageElement.srcset = project.cover.srcset;
+		previewImageElement.alt = project.cover.alt;
+	}
+	function scrollUpdate(){
+		console.log( window.scrollY );
+		
 	}
 
-	function cancelPreview() {
-		console.log("too fast!")
-		clearTimeout(hoverTimeout);
-	}
+
 </script>
+
+<svelte:window {onscroll} />
+
+<figure class="preview">
+	<img bind:this={previewImageElement} alt="" />
+</figure>
 
 <main class="page--projects">
 	<ul class="projects--list">
 		{#each projects as project}
-			<li
-				class="article"
-				onmouseenter={() => delayedPreview(project.cover.src)}
-				onmouseleave={cancelPreview}
-			>
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+			<li class="article" onmouseenter={() => preview(project)} onclick={() => activate(project)}>
 				<a href={project.id} title={project.title}>{project.title}</a>
 				<img class="background-image" src={project.cover.thumbnail} alt={project.cover.alt} />
 			</li>
 		{/each}
 	</ul>
 </main>
+
+<style>
+	.preview {
+		filter: blur(10px);
+		transform: scale(1.1);
+	}
+</style>
