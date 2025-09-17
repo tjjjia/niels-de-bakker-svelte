@@ -1,27 +1,10 @@
 // src/lib/preview.svelte.js
-let preview = $state({ stack: [] });
+let preview = $state({ project: {} });
 
 export { preview };
 
-export function setPreview(src) {
-	preview.stack = src;
-	console.log(src);
-}
-export function pushPreview(src) {
-	if (preview.stack.length > 1) {
-		preview.stack.shift();
-	}
+export function setPreview(project) {
 	
-	if (preview.stack.indexOf(src) > -1) {
-		console.log("duplicate!")
-		return;
-	}
-
-	preview.stack.push(src);
-}
-
-export function clearPreview() {
-	if (preview.stack.length > 2) {
-		preview.stack.shift();
-	}
+	preview.project = project;
+	// console.log(preview.project);
 }
