@@ -28,7 +28,7 @@
 
 <style>
 	:global(body) {
-		/* --bg: var(--experiments-bg); */
-		/* --fg: var(--experiments-fg); */
+		--bg: var(--experiments-bg);
+		--fg: var(--experiments-fg);
 	}
 </style>
