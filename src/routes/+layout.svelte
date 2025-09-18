@@ -4,23 +4,36 @@
 	import { page } from "$app/stores";
 	import { beforeNavigate, goto } from "$app/navigation";
 
-	import Navigation from "$lib/components/Navigation.svelte";
-	let path = $state();
-
-	let { children } = $props();
-
-	import { preview, setPreview } from "$lib/preview.svelte.js";
+	let { data, children } = $props();
 
 	import "$lib/styles/main.scss";
+	import Navigation from "$lib/components/Navigation.svelte";
 
+	/*
+	handle scroll direction
+	via https://bobbyhadz.com/blog/detect-the-scroll-direction-using-javascript
+	*/
+	let scrollDirection = $state("");
+	let lastScrollTop;
+	
+	function handleScroll() {
+		const scrollTopPosition = window.pageYOffset || document.documentElement.scrollTop;
+		if (scrollTopPosition > lastScrollTop) {
+			scrollDirection = "down";
+		} else if (scrollTopPosition < lastScrollTop) {
+			scrollDirection = "up";
+		}
+		lastScrollTop = scrollTopPosition <= 0 ? 0 : scrollTopPosition;
+	}
+
+	/*
+	route dependent delays/animation
+	*/
+	import { preview, setPreview } from "$lib/preview.svelte.js";
+	import { onMount } from "svelte";
+	let path = $state();
 	let transitioningOut = $state(false);
 	let navigationTimeout; // delay in (ms)
-
-	$effect(() => {
-		path = $page.url.pathname;
-		document.body.dataset.path = path;
-		// document.body.dataset.transitioning = transitioningOut ? "true" : "false";
-	});
 
 	beforeNavigate(async (navigation) => {
 		if (navigation.from === null || navigation.to === null) return; //skip initial
@@ -38,18 +51,27 @@
 		if (!transitioningOut) {
 			console.log("🛑 Pause page routing", navigation.to.url.pathname);
 			transitioningOut = true;
-			document.body.dataset.transitioning = transitioningOut;
 			navigation.cancel();
 
 			setTimeout(async () => {
-				await goto(navigation.to.url.pathname);
+				// navigation.retry();
+				await goto(navigation.to.url.pathname); // resumes the canceled navigation
 				console.log(`🟢 Navigating to ${navigation.to.url.pathname}`);
 
 				transitioningOut = false;
-				document.body.dataset.transitioning = transitioningOut;
 			}, navigationTimeout);
 		}
 	});
+
+	$effect(() => {
+		path = $page.url.pathname; // used for Navigation.svelte
+		document.body.dataset.transitioning = transitioningOut; // used for blurred preview transition
+		document.body.dataset.scrolldirection = scrollDirection; // used for blurred preview transition
+	});
+
+	onMount(() =>{
+		lastScrollTop = window.pageYOffset || document.documentElement.scrollTop
+	})
 </script>
 
 <svelte:head>
@@ -57,17 +79,23 @@
 </svelte:head>
 
 <figure class="preview">
+	{#if preview.project.cover}
 	<img
-		src={preview.project.cover ? preview.project.cover.src : null}
-		srcset={preview.project.cover ? preview.project.cover.srcset : null}
-		alt={preview.project.cover ? preview.project.cover.alt : null}
+		src={preview.project.cover.src ?? null}
+		srcset={preview.project.cover.srcset ?? null}
+		alt={preview.project.cover.alt ?? null}
 	/>
-	<figcaption>{preview.project.title ?? null}</figcaption>
+	{/if}
+	{#if preview.project.title}
+		 <figcaption>{preview.project.title ?? null}</figcaption>
+	{/if}
 </figure>
 
 <Navigation {path} />
 
 {@render children?.()}
+
+<svelte:window onscroll={handleScroll} />
 
 <style lang="scss">
 	.preview {
@@ -78,18 +106,19 @@
 		figcaption {
 			opacity: 0;
 		}
-
 		img {
-			// background-color: black;
+			// opacity: 0;
 		}
 	}
 	:global([data-transitioning="false"]) {
 		.preview {
+			opacity: unset;
 			animation: fadeOutBlockout 1500ms cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
 		}
 	}
 	:global([data-transitioning="true"]) {
 		.preview {
+			opacity: unset;
 			animation: fadeInBlockout 500ms cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
 		}
 	}

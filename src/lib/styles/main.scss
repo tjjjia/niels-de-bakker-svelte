@@ -9,15 +9,17 @@ body {
 	background-color: var(--bg);
 	color: var(--fg);
 
+	padding-top: var(--nav-height);
 
 	transition:
-		background-color 0.8s,
-		color 0.8s;
+		background-color 800ms,
+		color 800ms;
+}
+a:link, a:visited, a:hover, a:active {
+	color: inherit;
+	text-decoration: none;
 }
 
-html, body {
-  // scrollbar-color: #fff transparent;
-}
 
 /* BODY ANIMATION */
 body:has(.menu--item#projects a[aria-current="page"]) {
@@ -53,83 +55,21 @@ nav {
 	padding: 1rem;
 }
 
-/* NAVIGATION */
-
-nav {
-	font-size: 2rem;
-}
 main {
 	font-size: 1.5rem;
 }
 
-nav {
-	margin-bottom: 1rem;
-	ul {
-		display: flex;
-		justify-content: space-between;
-	}
-	/* #projects a,
-  #experiments a {
-    display: block;
-    text-underline-offset: 0.5rem;
-    transition: transform 0.6s cubic-bezier(1, 0, 0, 1);
-    transform: rotateX(180deg);
-  }
-  #projects a[aria-current="page"],
-  #projects a:hover,
-  #experiments a[aria-current="page"],
-  #experiments a:hover {
-    transform: rotateX(0deg);
-  }
-  #about a:hover .dot {
-    background-color: black;
-  } */
-}
-
-nav ul {
-	transition: transform 0.3s ease;
-	transform: rotateX(0deg);
-}
-
-nav a {
-	display: inline-block;
-	transform: rotateX(180deg);
-	transition: transform 0.3s ease;
-}
-
-nav a[aria-current="page"] {
-	transform: rotateX(0deg);
-}
-
-nav li:first-child,
-.projects--list,
-.preview {
-	font-family: var(--font-mono);
-}
-
-nav a,
-.article a {
-	color: inherit;
-	text-decoration: none;
-}
-
-#about {
-	align-self: center;
-	display: flex;
-}
-.dot {
-	height: 1rem;
-	width: 1rem;
-	background-color: transparent;
-	border: 1px solid var(--fg);
-	border-radius: 50%;
-	display: flex;
-}
 
 /* PROJECT/EXPERIMENT PAGES */
 .project--header,
 .experiment--header {
-	position: relative;
+	position: sticky;
+	top: 0;
+	background-color: var(--bg);
+	
+	transition:
+		background-color 800ms,
+		color 800ms;
 }
 /* GRID */
 .grid {
@@ -157,7 +97,7 @@ nav a,
 	font-size: 2rem;
 }
 
-/* PROJETS BACKGROUND */
+/* PROJECTS BACKGROUND */
 .background-image {
 	position: fixed;
 	top: 0;
@@ -214,17 +154,17 @@ nav a,
 	}
 }
 
-li.article:hover {
-	text-indent: 1rem;
+// li.article:hover {
+// 	text-indent: 1rem;
 
-	.background-image {
-		animation: fadeIn 800ms cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
-	}
-}
+// 	.background-image {
+// 		animation: fadeIn 800ms cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
+// 	}
+// }
 
-li.article:not(hover) > .background-image {
-	animation: fadeOut 800ms cubic-bezier(0.66, 0, 0.34, 1) forwards;
-}
+// li.article:not(hover) > .background-image {
+// 	animation: fadeOut 800ms cubic-bezier(0.66, 0, 0.34, 1) forwards;
+// }
 
 /* MEDIA */
 /* Photoswipe captions */

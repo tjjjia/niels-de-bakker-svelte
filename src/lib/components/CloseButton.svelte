@@ -1,4 +1,5 @@
 <script>
+	 // previously "&#x2715"
 	let { href, text = "&#x2715", title } = $props(); // instead of `export let`
 </script>
 
@@ -17,4 +18,3 @@
 		color: var(--fg);
 	}
 </style>
-

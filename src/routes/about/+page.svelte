@@ -1,12 +1,16 @@
 <script>
 	/** @type {import('./$types').PageProps} */
 	let { data } = $props();
-
-	console.log(data);
 </script>
 
-<h1>about</h1>
+<svelte:head>
+	<title>{data.author} | {data.title}</title>
+</svelte:head>
+
+
 <main class="page--about">
+	<h1>about</h1>
+	
 	<div class="grid">
 		<div class="column" style="--span:6" id="biography">
 			{@html data.biography}

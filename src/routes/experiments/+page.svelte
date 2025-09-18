@@ -8,6 +8,11 @@
 	let experiments_by_tag = data.experiments_by_tag;
 </script>
 
+<svelte:head>
+	<title>{data.author} | {data.title}</title>
+</svelte:head>
+
+
 <main class="page--experiments">
 	<ul class="experiments--list">
 		{#each experiments_by_tag as tag}
