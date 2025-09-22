@@ -18,9 +18,7 @@
 	const { code, language } = block.content;
 
 	// highlighter
-  import {HighlightAuto} from "svelte-highlight";
-  // import Highlight from "svelte-highlight";
-  // import typescript from "svelte-highlight/languages/typescript";
+  import { HighlightAuto } from "svelte-highlight";
 	import theme from "svelte-highlight/styles/github-dark";
 
 </script>
@@ -35,6 +33,6 @@
 
 <style>
 	:global(code) {
-		font-family: "fragment mono", var(--font-mono);
+		font-family: var(--font-mono);
 	}
 </style>
