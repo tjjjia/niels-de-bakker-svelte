@@ -35,7 +35,7 @@
 </script>
 
 {#each layouts as layout}
-	<section class="grid" id={layout.id}>
+	<section class="{layout.class} grid" id={layout.id}>
 		{#each layout.columns as column}
 			<div class="column" id={column.id} style="--span:{fraction2span(column.width)}">
 				{#each column.blocks as block}
