@@ -1,34 +1,23 @@
 <script>
 	/** @type {import('./$types').PageProps} */
 	let { data } = $props();
+	import { PUBLIC_KIRBY_DOMAIN } from "$env/static/public";
+
+	import KirbyLayout from "$lib/components/KirbyLayout.svelte";
 </script>
 
 <svelte:head>
 	<title>{data.author} | {data.title}</title>
 </svelte:head>
 
+<main class="about--content column">
+	<header class="about--header">
+		<!-- <h1>{data.title}</h1> -->
+	</header>
 
-<main class="page--about">
-	<h1>about</h1>
-	
-	<div class="grid">
-		<div class="column" style="--span:6" id="biography">
-			{@html data.biography}
-		</div>
-		<div class="column" style="--span:6" id="contact">
-			<ul class="socials">
-				<li>{data.email}</li>
+	<KirbyLayout layouts={data.content} />
 
-				{#each data.social as social}
-					<li>
-						<a href={social.url} title={social.platform} target="_blank">{social.platform}</a>
-					</li>
-				{/each}
-			</ul>
-			<div class="address">
-				{@html data.address}
-			</div>
-		</div>
-		<div class="gallery">(gallery)</div>
-	</div>
+	{#if data.footnotes}
+		{@html data.footnotes}
+	{/if}
 </main>

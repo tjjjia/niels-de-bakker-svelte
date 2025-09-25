@@ -1,0 +1,25 @@
+/* Suisse Mono */
+@font-face {
+	font-family: "SuisseIntlMono";
+	src: url("../assets/fonts/suisse-mono/SuisseIntlMono-Thin.otf") format("opentype");
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "SuisseIntlMono";
+	src: url("../assets/fonts/suisse-mono/SuisseIntlMono-Regular.otf") format("opentype");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "SuisseIntlMono";
+	src: url("../assets/fonts/suisse-mono/SuisseIntlMono-Bold.otf") format("opentype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Archivo */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap");

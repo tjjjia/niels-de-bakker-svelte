@@ -12,11 +12,12 @@
 	<title>{data.author} | {data.title}</title>
 </svelte:head>
 
-
-<main class="experiment--content">
+<main class="experiment--content column">
 	<header class="experiment--header">
-		<h1>{data.title}</h1>
-		<CloseButton href="/experiments" title="Back to Experiments" text="Close Experiment"/>
+		<div class="container">
+			<h1>{data.title}</h1>
+		</div>
+		<CloseButton href="/experiments" title="Back to Experiments" text="Close Experiment" />
 	</header>
 
 	<KirbyLayout layouts={data.content} />
@@ -27,7 +28,11 @@
 </main>
 
 <style>
+	.experiment--header h1 {
+		font-weight: 300;
+	}
 	:global(body) {
+		/* from experiments/[id] */
 		--bg: var(--experiments-bg);
 		--fg: var(--experiments-fg);
 	}

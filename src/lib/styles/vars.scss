@@ -1,18 +1,23 @@
 :root {
-  --bg: rgb(231, 231, 231);
-  --fg: black;
+	--bg: rgb(231, 231, 231);
+	--fg: black;
 
-  --projects-bg: rgb(255, 255, 255);
-  --projects-fg: rgb(0, 0, 0);
+	--projects-bg: rgb(255, 255, 255);
+	--projects-fg: rgb(0, 0, 0);
 
-  --about-bg: rgb(180, 180, 180);
-  --about-fg: rgb(64, 64, 64);
+	--about-bg: rgb(180, 180, 180);
+	--about-fg: rgb(64, 64, 64);
 
-  --experiments-bg: rgb(0, 0, 0);
-  --experiments-fg: rgb(255, 255, 255);
+	--experiments-bg: rgb(0, 0, 0);
+	--experiments-fg: rgb(255, 255, 255);
 
-  --font-mono: "Courier New", Courier, monospace;
-  --font-sans: Arial, sans-serif;
+	--color-id-1: #ff7b72;
+	--color-id-2: #79c0ff;
+	--color-id-3: #d2a8ff;
+	--color-id-4: #ffa657;
 
-  --nav-height: 4.5rem;
+	--font-mono: "SuisseIntlMono", Courier, monospace;
+	--font-sans: "Archivo", sans-serif;
+
+	--nav-height: 4.5rem;
 }

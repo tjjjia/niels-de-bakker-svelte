@@ -15,7 +15,7 @@
 	let effectInProgress = false; // boolean, stops routine if true
 	let throttlingInterval = 250; // interval in ms
 	let pendingElement = null; // last element hovered
-	let currentlyOut = true // is the mouse still hovering over an element?
+	let currentlyOut = true; // is the mouse still hovering over an element?
 
 	function handleMouseEnter(element) {
 		currentlyOut = false;
@@ -31,13 +31,12 @@
 		setTimeout(() => {
 			effectInProgress = false;
 
-			if(currentlyOut) return; // don't reactivate last element if we are out
-			if ( pendingElement && pendingElement !== activeElement) {
+			if (currentlyOut) return; // don't reactivate last element if we are out
+			if (pendingElement && pendingElement !== activeElement) {
 				const next = pendingElement;
 				pendingElement = null;
 				handleMouseEnter(next);
 			}
-
 		}, throttlingInterval);
 	}
 	function handleMouseLeave(element) {
@@ -81,10 +80,7 @@
 <style>
 	.article {
 		font-family: var(--font-mono);
-	}
-
-	.article:hover {
-		text-indent: 1rem;
+		font-weight: 100;
 	}
 
 	:global(.fade-in) {

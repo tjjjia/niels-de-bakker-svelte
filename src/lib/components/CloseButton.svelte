@@ -1,5 +1,5 @@
 <script>
-	 // previously "&#x2715"
+	// previously "&#x2715"
 	let { href, text = "&#x2715", title } = $props(); // instead of `export let`
 </script>
 
@@ -7,14 +7,10 @@
 
 <style>
 	.button--close {
-		/* positioning */
-		position: absolute;
-		top: 0;
-		right: 0;
-
-		/* appearance */
 		font-size: 1.5rem;
 		text-decoration: none;
 		color: var(--fg);
+		margin-left: auto; /* pushes button to the right */
+		flex: 0 0 auto; /* width is just the text */
 	}
 </style>
