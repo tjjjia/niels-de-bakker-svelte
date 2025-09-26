@@ -30,7 +30,7 @@
 
 	function handleFootnotes(footnotes) {
 		allFootnotes = [...allFootnotes, ...footnotes];
-		console.log(footnotes);
+		// console.log(footnotes);
 	}
 </script>
 

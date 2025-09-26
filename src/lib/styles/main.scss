@@ -11,10 +11,6 @@ body {
 	font-weight: 300;
 
 	padding-top: var(--nav-height);
-
-	transition:
-		background-color 800ms,
-		color 800ms;
 }
 a:link,
 a:visited,
@@ -28,38 +24,50 @@ a:active {
 	text-decoration: none;
 }
 
-/* BODY ANIMATION */
-body:has(.menu--item#projects a[aria-current="page"]) {
-	--bg: var(--projects-bg);
-	--fg: var(--projects-fg);
-}
-body:has(.menu--item#about a[aria-current="page"]) {
-	--bg: var(--about-bg);
-	--fg: var(--about-fg);
-}
-body:has(.menu--item#experiments a[aria-current="page"]) {
-	--bg: var(--experiments-bg);
-	--fg: var(--experiments-fg);
-}
-
-/* === hover colors (override current) === */
-body:has(.menu--item#projects:hover a) {
-	--bg: var(--projects-bg);
-	--fg: var(--projects-fg);
-}
-body:has(.menu--item#about:hover a) {
-	--bg: var(--about-bg);
-	--fg: var(--about-fg);
-}
-body:has(.menu--item#experiments:hover a) {
-	--bg: var(--experiments-bg);
-	--fg: var(--experiments-fg);
-}
-
 main,
 nav {
 	position: relative;
 	padding: 1rem;
+}
+
+/* BODY ANIMATION */
+[data-theme="projects"] {
+	--bg: var(--projects-bg);
+	--fg: var(--projects-fg);
+}
+[data-theme="about"] {
+	--bg: var(--about-bg);
+	--fg: var(--about-fg);
+}
+[data-theme="experiments"] {
+	--bg: var(--experiments-bg);
+	--fg: var(--experiments-fg);
+}
+[data-theme][data-temporary="projects"] {
+	--bg: var(--projects-bg);
+	--fg: var(--projects-fg);
+}
+[data-theme][data-temporary="about"] {
+	--bg: var(--about-bg);
+	--fg: var(--about-fg);
+}
+[data-theme][data-temporary="experiments"] {
+	--bg: var(--experiments-bg);
+	--fg: var(--experiments-fg);
+}
+
+body,
+.dot,
+.project--header,
+.project--content,
+.experiments--list h2,
+.experiment--header,
+.experiment--content {
+	// collect all elements (above) and properties (below) that use var(--bg) and var(--fg).
+	transition:
+		background-color 800ms,
+		color 800ms,
+		border 800ms;
 }
 
 /* typography */
@@ -84,11 +92,9 @@ section.intro {
 	position: sticky;
 	top: 0;
 	padding: 0.5rem 0;
-	background-color: var(--bg);
 	border-bottom: 1px solid color-mix(in srgb, var(--bg) 0%, var(--fg) 15%);
-	transition:
-		background-color 800ms,
-		color 800ms;
+	
+	background-color: var(--bg);
 
 	.container {
 		flex: 1; /* grows to fill available space */
@@ -218,11 +224,6 @@ li.article:hover {
 	display: none;
 }
 
-pre.debug {
-	background-color: orangered;
-	color: white;
-	font-size: 0.85rem;
-}
 .preview,
 .project--cover {
 	width: 100%;
@@ -259,7 +260,7 @@ iframe {
 	aspect-ratio: 16 / 9;
 }
 
-/* footnoes */
+/* footnotes */
 .footnote,
 #footnotes li::marker {
 	color: var(--color-id-1);

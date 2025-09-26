@@ -1,21 +1,58 @@
 <script>
-	let { path } = $props();
+	import { page } from '$app/state';
+
+	let path = $state(page.url.pathname);
+	$effect(() => {
+		path = page.url.pathname;
+		const themeValue = getValue(path);
+		document.body.dataset.theme = getValue(path);
+	})
+
+	function getValue(path) {
+		return path.split('/').filter(Boolean)[0]; // gets part between first 2 slashes "/"
+	}
+
+	const handleMouseEnter = function(){
+		// set to temp
+		const tempValue = getValue(this.pathname);
+		document.body.dataset.temporary = tempValue;
+	}
+	const handleMouseLeave = function() {
+		// set back to default
+		document.body.removeAttribute("data-temporary");
+	}
 </script>
 
 <nav id="menu--pages" class="menu">
 	<ul id="menu--pages-list">
 		<li class="menu--item" id="projects">
-			<a href="/projects" aria-current={path === "/projects" ? "page" : undefined}>projects</a>
+			<a
+				href="/projects"
+				aria-current={path === "/projects" ? "page" : false}
+				onmouseenter={handleMouseEnter}
+				onmouseleave={handleMouseLeave}
+				>
+					projects</a>
 		</li>
 		<li class="menu--item" id="about">
-			<a href="/about" aria-current={path === "/about" ? "page" : undefined}
-				><span class="dot">about</span></a
-			>
+			<a
+				href="/about"
+				aria-current={path === "/about" ? "page" : false}
+				onmouseenter={handleMouseEnter}
+				onmouseleave={handleMouseLeave}
+				>
+				<span class="dot">about</span>
+			</a>
 		</li>
 		<li class="menu--item" id="experiments">
-			<a href="/experiments" aria-current={path === "/experiments" ? "page" : undefined}
-				>experiments</a
-			>
+			<a
+				href="/experiments"
+				aria-current={path === "/experiments" ? "page" : false}
+				onmouseenter={handleMouseEnter}
+				onmouseleave={handleMouseLeave}
+				>
+				experiments
+			</a>
 		</li>
 	</ul>
 </nav>

@@ -31,7 +31,6 @@
 	*/
 	import { preview, setPreview } from "$lib/preview.svelte.js";
 	import { onMount } from "svelte";
-	let path = $state();
 	let transitioningOut = $state(false);
 	let navigationTimeout; // delay in (ms)
 
@@ -49,14 +48,14 @@
 		}
 
 		if (!transitioningOut) {
-			console.log("🛑 Pause page routing", navigation.to.url.pathname);
+			// console.log("🛑 Pause page routing", navigation.to.url.pathname);
 			transitioningOut = true;
 			navigation.cancel();
 
 			setTimeout(async () => {
 				// navigation.retry();
 				await goto(navigation.to.url.pathname); // resumes the canceled navigation
-				console.log(`🟢 Navigating to ${navigation.to.url.pathname}`);
+				// console.log(`🟢 Navigating to ${navigation.to.url.pathname}`);
 
 				transitioningOut = false;
 			}, navigationTimeout);
@@ -64,7 +63,6 @@
 	});
 
 	$effect(() => {
-		path = $page.url.pathname; // used for Navigation.svelte
 		document.body.dataset.transitioning = transitioningOut; // used for blurred preview transition
 		document.body.dataset.scrolldirection = scrollDirection; // used for blurred preview transition
 	});
@@ -91,7 +89,7 @@
 	{/if}
 </figure>
 
-<Navigation {path} />
+<Navigation />
 
 {@render children?.()}
 

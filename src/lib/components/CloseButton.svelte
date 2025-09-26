@@ -9,7 +9,6 @@
 	.button--close {
 		font-size: 1.5rem;
 		text-decoration: none;
-		color: var(--fg);
 		margin-left: auto; /* pushes button to the right */
 		flex: 0 0 auto; /* width is just the text */
 	}
