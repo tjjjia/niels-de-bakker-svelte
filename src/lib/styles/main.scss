@@ -65,9 +65,9 @@ body,
 .experiment--content {
 	// collect all elements (above) and properties (below) that use var(--bg) and var(--fg).
 	transition:
-		background-color 800ms,
-		color 800ms,
-		border 800ms;
+		background-color var(--duration-long),
+		color var(--duration-long),
+		border var(--duration-long);
 }
 
 /* typography */
@@ -93,7 +93,7 @@ section.intro {
 	top: 0;
 	padding: 0.5rem 0;
 	border-bottom: 1px solid color-mix(in srgb, var(--bg) 0%, var(--fg) 15%);
-	
+
 	background-color: var(--bg);
 
 	.container {
@@ -264,4 +264,8 @@ iframe {
 .footnote,
 #footnotes li::marker {
 	color: var(--color-id-1);
+}
+
+.footnote a {
+	scroll-margin-top: 5rem;
 }

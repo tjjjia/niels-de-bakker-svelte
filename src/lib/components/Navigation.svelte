@@ -1,26 +1,26 @@
 <script>
-	import { page } from '$app/state';
+	import { page } from "$app/state";
 
 	let path = $state(page.url.pathname);
 	$effect(() => {
 		path = page.url.pathname;
 		const themeValue = getValue(path);
 		document.body.dataset.theme = getValue(path);
-	})
+	});
 
 	function getValue(path) {
-		return path.split('/').filter(Boolean)[0]; // gets part between first 2 slashes "/"
+		return path.split("/").filter(Boolean)[0]; // gets part between first 2 slashes "/"
 	}
 
-	const handleMouseEnter = function(){
+	const handleMouseEnter = function () {
 		// set to temp
 		const tempValue = getValue(this.pathname);
 		document.body.dataset.temporary = tempValue;
-	}
-	const handleMouseLeave = function() {
+	};
+	const handleMouseLeave = function () {
 		// set back to default
 		document.body.removeAttribute("data-temporary");
-	}
+	};
 </script>
 
 <nav id="menu--pages" class="menu">
@@ -31,8 +31,9 @@
 				aria-current={path === "/projects" ? "page" : false}
 				onmouseenter={handleMouseEnter}
 				onmouseleave={handleMouseLeave}
-				>
-					projects</a>
+			>
+				projects</a
+			>
 		</li>
 		<li class="menu--item" id="about">
 			<a
@@ -40,7 +41,7 @@
 				aria-current={path === "/about" ? "page" : false}
 				onmouseenter={handleMouseEnter}
 				onmouseleave={handleMouseLeave}
-				>
+			>
 				<span class="dot">about</span>
 			</a>
 		</li>
@@ -50,7 +51,7 @@
 				aria-current={path === "/experiments" ? "page" : false}
 				onmouseenter={handleMouseEnter}
 				onmouseleave={handleMouseLeave}
-				>
+			>
 				experiments
 			</a>
 		</li>
@@ -68,13 +69,13 @@
 		ul {
 			display: flex;
 			justify-content: space-between;
-			transition: transform 0.3s ease;
+			transition: transform var(--duration-normal) ease;
 			transform: rotateX(0deg);
 		}
 		a {
 			display: flex;
 			transform: rotateX(180deg);
-			transition: transform 0.3s ease;
+			transition: transform var(--duration-normal) ease;
 			color: inherit;
 			text-decoration: none;
 		}
@@ -111,7 +112,7 @@
 	/* Transitions */
 	nav {
 		opacity: 1;
-		transition: opacity 800ms;
+		transition: opacity var(--duration-long);
 	}
 	:global([data-scrolldirection="down"]) {
 		nav {

@@ -5,6 +5,7 @@
 	// const experiments = data.experiments.experiments;
 	let experiments = data.experiments;
 	let experiments_by_tag = data.experiments_by_tag;
+	let experiments_by_category = data.experiments_by_category;
 </script>
 
 <svelte:head>
@@ -13,11 +14,14 @@
 
 <main class="page--experiments">
 	<ul class="experiments--list">
-		{#each experiments_by_tag as tag}
-			<section id={tag.title}>
-				<h2>{tag.title}</h2>
-				{#each tag.experiments as experiment}
-					<li class="article"><a href={experiment.id}>{experiment.title}</a></li>
+		{#each experiments_by_category as category}
+			<section id={category.title}>
+				<h2>{category.title}</h2>
+				{#each category.experiments as experiment}
+					<li class="article">
+						<a href={experiment.id}>{experiment.title}</a>
+						<sup class="article__tags">{experiment.tags}</sup>
+					</li>
 				{:else}
 					<p>No experiments found.</p>
 				{/each}
@@ -31,7 +35,7 @@
 <style>
 	.experiments--list {
 		section {
-			margin-bottom: 0.75rem;
+			margin-top: 0.75rem;
 		}
 		h2 {
 			color: color-mix(in srgb, 0% var(--bg), 30% var(--fg));
@@ -40,5 +44,10 @@
 	}
 	li.article {
 		font-weight: 300;
+		.article__tags {
+			font-size: 1.25rem;
+			color: color-mix(in srgb, 0% var(--bg), 30% var(--fg));
+			font-weight: 100;
+		}
 	}
 </style>

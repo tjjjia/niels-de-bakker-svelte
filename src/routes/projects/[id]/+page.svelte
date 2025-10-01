@@ -3,12 +3,12 @@
 	let { data } = $props();
 
 	import { PUBLIC_KIRBY_DOMAIN } from "$env/static/public";
-
 	import KirbyLayout from "$lib/components/KirbyLayout.svelte";
 	import CloseButton from "$lib/components/CloseButton.svelte";
 
 	import { onMount } from "svelte";
 	import { setPreview } from "$lib/preview.svelte.js";
+	import { durations } from "$lib/animation.js";
 
 	/*
 	background blurring behavior
@@ -16,11 +16,19 @@
 	let mainElement = $state();
 	let headerElement = $state();
 	let blurBackground = $state(false);
-	let scrollThreshold = 0.6; // how much should remain to trigger a blur
-	let scrollIntoViewTimeout = 1500; // (ms) how long we wait until an auto-scroll is triggered
+	let scrollThreshold = 0.6;
+	let scrollIntoViewTimeout = durations.longest;
 
-	// NEW: control for hiding header .container
+	// control for hiding header .container
 	let hideHeaderContainer = $state(false);
+
+	// store the exact scroll threshold for hiding
+	let headerScrollThreshold = 0;
+
+	function getDocumentOffset(el) {
+		const rect = el.getBoundingClientRect();
+		return rect.top + window.scrollY;
+	}
 
 	function scrollUpdate() {
 		const rect = mainElement.getBoundingClientRect();
@@ -29,24 +37,28 @@
 		// existing blur logic
 		blurBackground = remaining < scrollThreshold;
 
-		// NEW: hide header container when scroll > 50px
-		const headerOffset = window.innerHeight + 6 * 16; // 4rem ≈ 64px (assuming root font-size = 16px)
-		hideHeaderContainer = window.scrollY > headerOffset;
+		// hide header container when scrolled beyond threshold
+		hideHeaderContainer = window.scrollY > headerScrollThreshold;
 	}
 
 	onMount(() => {
-		scrollUpdate(); // initial check
 		setPreview(data);
 
-		window.addEventListener("scroll", scrollUpdate);
-
+		// compute threshold once DOM is stable
 		setTimeout(() => {
-			// scroll the header into view
 			headerElement.scrollIntoView({
-				behavior: "smooth", // smooth | instant | auto
-				block: "start" // start | end | center | nearest
+				behavior: "smooth",
+				block: "start"
 			});
+
+			// threshold = top offset of headerElement + 0rem
+			const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+			headerScrollThreshold = getDocumentOffset(headerElement) + 0 * rem;
+
+			scrollUpdate();
 		}, scrollIntoViewTimeout);
+
+		window.addEventListener("scroll", scrollUpdate);
 
 		return () => {
 			window.removeEventListener("scroll", scrollUpdate);
@@ -63,7 +75,7 @@
 <main class="project--content" bind:this={mainElement}>
 	<figure class="project--cover" class:blurred={blurBackground}>
 		<img src={data.cover.src} srcset={data.cover.srcset} alt={data.cover.alt} />
-		<!-- <figcaption>{data.title}</figcaption> -->
+		<figcaption>{data.title}</figcaption>
 	</figure>
 
 	<header
@@ -98,13 +110,17 @@
 	}
 
 	.project--cover > * {
-		transition: filter 800ms;
+		transition: filter var(--duration-normal) var(--easing-in);
 	}
 	.project--cover.blurred img {
 		filter: blur(20px);
 	}
 	.project--cover.blurred figcaption {
 		filter: blur(20px);
+	}
+	.project--cover figcaption {
+		font-weight: 6rem;
+		font-weight: 500;
 	}
 	:global(body) {
 		/* from projects/[id] */
@@ -118,8 +134,8 @@
 			opacity: 1;
 			overflow: hidden;
 			transition:
-				max-height 0.2s ease,
-				opacity 0.2s ease;
+				max-height var(--duration-normal) var(--easing-inout),
+				opacity var(--duration-normal) ease;
 		}
 
 		.project--header.hide-container .container {

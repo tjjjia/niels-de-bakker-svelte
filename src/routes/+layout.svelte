@@ -9,13 +9,20 @@
 	import "$lib/styles/main.scss";
 	import Navigation from "$lib/components/Navigation.svelte";
 
+	import { registerAnimationVars } from "$lib/animation";
+
+	// Run once on client
+	if (typeof window !== "undefined") {
+		registerAnimationVars();
+	}
+
 	/*
 	handle scroll direction
 	via https://bobbyhadz.com/blog/detect-the-scroll-direction-using-javascript
 	*/
 	let scrollDirection = $state("");
 	let lastScrollTop;
-	
+
 	function handleScroll() {
 		const scrollTopPosition = window.pageYOffset || document.documentElement.scrollTop;
 		if (scrollTopPosition > lastScrollTop) {
@@ -67,9 +74,9 @@
 		document.body.dataset.scrolldirection = scrollDirection; // used for blurred preview transition
 	});
 
-	onMount(() =>{
-		lastScrollTop = window.pageYOffset || document.documentElement.scrollTop
-	})
+	onMount(() => {
+		lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	});
 </script>
 
 <svelte:head>
@@ -78,14 +85,14 @@
 
 <figure class="preview">
 	{#if preview.project.cover}
-	<img
-		src={preview.project.cover.src ?? null}
-		srcset={preview.project.cover.srcset ?? null}
-		alt={preview.project.cover.alt ?? null}
-	/>
+		<img
+			src={preview.project.cover.src ?? null}
+			srcset={preview.project.cover.srcset ?? null}
+			alt={preview.project.cover.alt ?? null}
+		/>
 	{/if}
 	{#if preview.project.title}
-		 <figcaption>{preview.project.title ?? null}</figcaption>
+		<figcaption>{preview.project.title ?? null}</figcaption>
 	{/if}
 </figure>
 
@@ -111,13 +118,14 @@
 	:global([data-transitioning="false"]) {
 		.preview {
 			opacity: unset;
-			animation: fadeOutBlockout 1500ms cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
+			animation: fadeOutBlockout var(--duration-longest) cubic-bezier(0.85, 0.09, 0.15, 0.91)
+				forwards;
 		}
 	}
 	:global([data-transitioning="true"]) {
 		.preview {
 			opacity: unset;
-			animation: fadeInBlockout 500ms cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
+			animation: fadeInBlockout var(--duration-slow) cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
 		}
 	}
 </style>

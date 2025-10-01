@@ -88,9 +88,9 @@
 	}
 
 	:global(.fade-in) .background-image {
-		animation: fadeIn 800ms cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
+		animation: fadeIn var(--duration-long) cubic-bezier(0.85, 0.09, 0.15, 0.91) forwards;
 	}
 	:global(.fade-out) .background-image {
-		animation: fadeOut 800ms cubic-bezier(0.66, 0, 0.34, 1) forwards;
+		animation: fadeOut var(--duration-long) var(--easing-inout) forwards;
 	}
 </style>
