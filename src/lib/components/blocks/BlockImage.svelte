@@ -22,7 +22,6 @@
 
 	const { alt, caption, crop, height, link, ratio, src, srcset, width } = block.content;
 
-
 	/* Photoswipe code
 	https://photoswipe.com/getting-started/
 
@@ -70,7 +69,7 @@
 
 {#if !block.isHidden}
 	<section class="block">
-		<figure data-ratio={ratio} data-crop={crop}>
+		<figure class="image-gallery" data-ratio={ratio} data-crop={crop}>
 			{#if link}
 				<div class="link-external">
 					<a href={link} target="_blank">
@@ -78,7 +77,7 @@
 					</a>
 				</div>
 			{:else}
-				<div class="auto-cols pswp-gallery">
+				<div class="auto-cols slim pswp-gallery">
 					<div class="pswp-gallery--item">
 						<a href={src} data-pswp-width={width} data-pswp-height={height} target="_blank">
 							<img
@@ -89,7 +88,8 @@
 								{srcset}
 								data-srcset={srcset}
 								{width}
-								{height} />
+								{height}
+							/>
 						</a>
 					</div>
 				</div>

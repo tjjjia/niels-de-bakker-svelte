@@ -30,3 +30,12 @@
 		</svelte:element>
 	</section>
 {/if}
+
+<style>
+	.text--sans-large,
+	.text--mono-medium,
+	.text--uppercase {
+		color: color-mix(in srgb, 0% var(--bg), 40% var(--fg));
+		font-weight: 200;
+	}
+</style>

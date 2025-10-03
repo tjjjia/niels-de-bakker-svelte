@@ -13,21 +13,21 @@
 </svelte:head>
 
 <main class="page--experiments">
-	<ul class="experiments--list">
+	<ul class="experiments--list auto-cols wide">
 		{#each experiments_by_category as category}
 			<section id={category.title}>
 				<h2>{category.title}</h2>
 				{#each category.experiments as experiment}
 					<li class="article">
 						<a href={experiment.id}>{experiment.title}</a>
-						<sup class="article__tags">{experiment.tags}</sup>
+						<!-- <sup class="article__tags">{experiment.tags}</sup> -->
 					</li>
 				{:else}
-					<p>No experiments found.</p>
+					<p>No experiments yet</p>
 				{/each}
 			</section>
 		{:else}
-			<p>No experiments found.</p>
+			<p>No experiments yet.</p>
 		{/each}
 	</ul>
 </main>
@@ -38,7 +38,7 @@
 			margin-top: 0.75rem;
 		}
 		h2 {
-			color: color-mix(in srgb, 0% var(--bg), 30% var(--fg));
+			color: color-mix(in srgb, 0% var(--bg), 40% var(--fg));
 			font-weight: 200;
 		}
 	}
@@ -46,7 +46,7 @@
 		font-weight: 300;
 		.article__tags {
 			font-size: 1.25rem;
-			color: color-mix(in srgb, 0% var(--bg), 30% var(--fg));
+			color: color-mix(in srgb, 0% var(--bg), 40% var(--fg));
 			font-weight: 100;
 		}
 	}

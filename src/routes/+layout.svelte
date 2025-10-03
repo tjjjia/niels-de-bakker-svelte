@@ -1,5 +1,5 @@
 <script>
-	import favicon from "$lib/assets/favicon.svg";
+	import favicon from "$lib/assets/favicon.ico";
 
 	import { page } from "$app/stores";
 	import { beforeNavigate, goto } from "$app/navigation";

@@ -18,5 +18,13 @@
 </script>
 
 {#if !block.isHidden}
-	<div class="block">{@html text}</div>
+	<div class="block text">{@html text}</div>
 {/if}
+
+<style>
+	.block.text {
+		display: flex;
+		flex-direction: column;
+		row-gap: 0.5rem;
+	}
+</style>

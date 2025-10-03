@@ -73,7 +73,7 @@ body,
 /* typography */
 
 main {
-	font-size: 1.5rem;
+	font-size: 1.4rem;
 }
 
 p {
@@ -81,7 +81,10 @@ p {
 	white-space: wrap;
 }
 section.intro {
-	font-size: 2rem;
+	font-size: 1.8rem;
+	> div {
+		margin: 0 auto auto;
+	}
 }
 
 /* PROJECT/EXPERIMENT PAGES */
@@ -117,8 +120,14 @@ section.intro {
 
 .auto-cols {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 	gap: 1rem;
+}
+.auto-cols.slim {
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.auto-cols.wide {
+	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
 
 @media screen and (min-width: 60rem) {
@@ -204,24 +213,29 @@ li.article:hover {
 /* MEDIA */
 /* Photoswipe captions */
 .pswp__custom-caption {
-	background: rgba(75, 150, 75, 0.75);
-	font-size: 16px;
-	color: #fff;
-	width: calc(100% - 32px);
+	background: var(--bg);
+	font-size: 1rem;
+	color: var(--fg);
+	width: calc(100% - 2rem);
 	max-width: 400px;
-	padding: 2px 8px;
+	padding: 0 0.5rem;
 	border-radius: 4px;
 	position: absolute;
 	left: 50%;
-	bottom: 16px;
+	bottom: 1rem;
 	transform: translateX(-50%);
 }
 .pswp__custom-caption a {
-	color: #fff;
+	color: var(--fg);
 	text-decoration: underline;
 }
 .hidden-caption-content {
 	display: none;
+}
+
+.image-gallery figcaption {
+	color: color-mix(in srgb, var(--bg) 0%, var(--fg) 40%);
+	font-size: 1.25rem;
 }
 
 .preview,
@@ -249,9 +263,12 @@ li.article:hover {
 }
 .preview figcaption,
 .project--cover figcaption {
-	font-size: 3rem;
+	font-size: 4.5rem;
 	font-family: var(--font-mono);
+	font-weight: 300 !important;
 	z-index: 10;
+	text-align: center;
+	text-shadow: 0 0 5px color-mix(in srgb, var(--bg) 10%, var(--bg) 30%);
 }
 
 /* iframes */
@@ -268,4 +285,9 @@ iframe {
 
 .footnote a {
 	scroll-margin-top: 5rem;
+}
+
+/* BLOCKS */
+.block p {
+	margin-bottom: 0.5rem;
 }

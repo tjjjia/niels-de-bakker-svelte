@@ -63,8 +63,8 @@
 </script>
 
 {#if !block.isHidden}
-	<figure data-ratio={ratio} data-crop={crop}>
-		<div class="auto-cols pswp-gallery">
+	<figure class="image-gallery" data-ratio={ratio} data-crop={crop}>
+		<div class="auto-cols slim pswp-gallery test">
 			{#each images as image}
 				<div class="pswp-gallery--item">
 					<a

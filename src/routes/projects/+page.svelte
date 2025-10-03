@@ -78,9 +78,10 @@
 </main>
 
 <style>
-	.article {
+	.projects--list li.article {
 		font-family: var(--font-mono);
 		font-weight: 100;
+		font-size: 2.35rem;
 	}
 
 	:global(.fade-in) {

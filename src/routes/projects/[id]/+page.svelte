@@ -21,9 +21,10 @@
 
 	// control for hiding header .container
 	let hideHeaderContainer = $state(false);
-
 	// store the exact scroll threshold for hiding
 	let headerScrollThreshold = 0;
+	// buffer zone (hysteresis) to prevent flicker
+	const buffer = 8; // px, adjust as needed (e.g. 2rem)
 
 	function getDocumentOffset(el) {
 		const rect = el.getBoundingClientRect();
@@ -37,8 +38,12 @@
 		// existing blur logic
 		blurBackground = remaining < scrollThreshold;
 
-		// hide header container when scrolled beyond threshold
-		hideHeaderContainer = window.scrollY > headerScrollThreshold;
+		// hysteresis logic: only flip when clearly past threshold +/- buffer
+		if (!hideHeaderContainer && window.scrollY > headerScrollThreshold + buffer) {
+			hideHeaderContainer = true;
+		} else if (hideHeaderContainer && window.scrollY < headerScrollThreshold - buffer) {
+			hideHeaderContainer = false;
+		}
 	}
 
 	onMount(() => {
