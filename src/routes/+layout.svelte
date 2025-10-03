@@ -92,7 +92,9 @@
 		/>
 	{/if}
 	{#if preview.project.title}
-		<figcaption>{preview.project.title ?? null}</figcaption>
+		<figcaption style="--titlecolor: {preview.project.titlecolor}; color: var(--titlecolor);">
+			{preview.project.title ?? null}
+		</figcaption>
 	{/if}
 </figure>
 
