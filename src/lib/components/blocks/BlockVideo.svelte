@@ -48,11 +48,11 @@
 			block.content.video = match ? match[1] : null;
 
 			query = new URLSearchParams({
-				autoplay: block.content.autoplay ? "1" : "0",
-				controls: block.content.controls ? "1" : "0",
-				loop: block.content.loop ? "1" : "0",
-				muted: block.content.muted ? "1" : "0",
-				playsinline: block.content.playsinline ? "1" : "0"
+				autoplay: (block.content.autoplay === true || block.content.autoplay === "true") ? "1" : "0",
+				controls: (block.content.controls === true || block.content.controls === "true") ? "1" : "0",
+				loop: (block.content.loop === true || block.content.loop === "true") ? "1" : "0",
+				muted: (block.content.muted === true || block.content.muted === "true") ? "1" : "0",
+				playsinline: (block.content.playsinline === true || block.content.playsinline === "true") ? "1" : "0",
 			});
 
 			src = `https://player.vimeo.com/video/${block.content.video}?${query.toString()}`;
@@ -66,6 +66,8 @@
 
 {#if !block.isHidden && url}
 	<section class="block">
+		{src}
+		{block.content.autoplay}
 		<figure>
 			{#if isVimeo}
 				<iframe
