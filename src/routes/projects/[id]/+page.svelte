@@ -49,6 +49,8 @@
 	onMount(() => {
 		setPreview(data);
 
+		document.documentElement.style.setProperty("--titlecolor",data.titlecolor);
+		
 		// compute threshold once DOM is stable
 		setTimeout(() => {
 			headerElement.scrollIntoView({
@@ -126,6 +128,7 @@
 	.project--cover figcaption {
 		font-weight: 6rem;
 		font-weight: 500;
+		color: var(--titlecolor);
 	}
 	:global(body) {
 		/* from projects/[id] */

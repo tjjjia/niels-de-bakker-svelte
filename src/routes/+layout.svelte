@@ -92,7 +92,7 @@
 		/>
 	{/if}
 	{#if preview.project.title}
-		<figcaption style="--titlecolor: {preview.project.titlecolor}; color: var(--titlecolor);">
+		<figcaption>
 			{preview.project.title ?? null}
 		</figcaption>
 	{/if}
@@ -112,6 +112,7 @@
 
 		figcaption {
 			opacity: 0;
+			color: var(--titlecolor);
 		}
 		img {
 			// opacity: 0;
