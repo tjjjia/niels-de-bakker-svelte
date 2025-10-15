@@ -8,7 +8,6 @@
 
 	import "$lib/styles/main.scss";
 	import Navigation from "$lib/components/Navigation.svelte";
-
 	import { registerAnimationVars } from "$lib/animation";
 
 	// Run once on client
@@ -40,15 +39,50 @@
 	import { onMount } from "svelte";
 	let transitioningOut = $state(false);
 	let navigationTimeout; // delay in (ms)
+	let crossfadeToggle = $state(false);
 
 	beforeNavigate(async (navigation) => {
 		if (navigation.from === null || navigation.to === null) return; //skip initial
+
+		console.log("going to", navigation.to.route.id);
+
+		if (
+			navigation.from.route.id === "/projects" &&
+			navigation.to.route.id   === "/projects/[id]"
+		) {
+			crossfadeToggle = true;
+		} else if (
+			navigation.from.route.id === "/experiments/[id]" &&
+			navigation.to.route.id   === "/experiments"
+		) {
+			crossfadeToggle = true;
+		} else if (
+			navigation.from.route.id === "/experiments" &&
+			navigation.to.route.id === "/experiments/[id]"
+		) {
+			crossfadeToggle = true;
+		}  else if (
+			navigation.from.route.id === "/experiments/[id]" &&
+			navigation.to.route.id === "/experiments"
+		) {
+			crossfadeToggle = true;
+		} else {
+			crossfadeToggle = false;
+		}
 
 		if (
 			navigation.to.route.id === "/projects/[id]" ||
 			navigation.from.route.id === "/projects/[id]"
 		) {
 			navigationTimeout = 1000;
+			window.scrollTo({ top: 0, behavior: "smooth" });
+		} else if (
+			navigation.to.route.id === "/experiments/[id]" ||
+			navigation.from.route.id === "/experiments/[id]"
+		) {
+			setPreview({}); // clear image first
+			navigationTimeout = 1000;
+			window.scrollTo({ top: 0, behavior: "smooth" });
 		} else {
 			setPreview({}); // clear image
 			navigationTimeout = 0;
@@ -84,18 +118,20 @@
 </svelte:head>
 
 <figure class="preview">
-	{#if preview.project.cover}
+	{#if crossfadeToggle}
+		<!-- {#if preview.project.cover} -->
 		<img
-			src={preview.project.cover.src ?? null}
-			srcset={preview.project.cover.srcset ?? null}
-			alt={preview.project.cover.alt ?? null}
+			src={preview.project.cover ? preview.project.cover.src : null}
+			srcset={preview.project.cover ? preview.project.cover.srcset : null}
+			alt={preview.project.cover ? preview.project.cover.alt : null}
 		/>
 	{/if}
-	{#if preview.project.title}
-		<figcaption>
-			{preview.project.title ?? null}
-		</figcaption>
-	{/if}
+	<!-- {#if preview.project.title} -->
+	<!-- <figcaption> -->
+	<!-- {preview.project.title ?? null} -->
+	<!-- </figcaption> -->
+	<!-- {/if} -->
+	<!-- <div class="blockout"></div> -->
 </figure>
 
 <Navigation />
