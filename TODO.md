@@ -1,7 +1,7 @@
 CMS
 
 - [ ] link disablen dat je naar pagina, file, etc. kan linken. ENKEL url (MT)
-- [ ] Admin rights (RV)
+- [x] Admin rights (RV)
 
 Font-end
 
@@ -11,3 +11,8 @@ Font-end
   - [ ] ook binnen experiments moet die komen
 - [ ] Closing projects > slide-out (MT)
 - [ ] Footnotes scrollt bij projects niet op juiste hoogte (scroll-margin) (RV)
+
+Styling
+
+- [ ] Mobile font size
+- [ ]

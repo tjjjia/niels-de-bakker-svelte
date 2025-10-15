@@ -58,7 +58,7 @@
 </svelte:head>
 
 <main class="page--projects">
-	<ul class="projects--list">
+	<ul class="projects--list column">
 		{#each projects as project, index}
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
@@ -78,10 +78,14 @@
 </main>
 
 <style>
-	.projects--list li.article {
-		font-family: var(--font-mono);
-		font-weight: 100;
-		font-size: 2.35rem;
+	.projects--list {
+		gap: 0.75rem;
+		li.article {
+			font-family: var(--font-mono);
+			font-weight: 100;
+			font-size: clamp(1.5rem, 2.5vw, 4rem);
+			line-height: 1.2;
+		}
 	}
 
 	:global(.fade-in) {

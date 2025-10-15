@@ -34,9 +34,6 @@
 
 <style>
 	.experiments--list {
-		section {
-			margin-top: 0.75rem;
-		}
 		h2 {
 			color: color-mix(in srgb, 0% var(--bg), 40% var(--fg));
 			font-weight: 200;
@@ -48,6 +45,14 @@
 			font-size: 1.25rem;
 			color: color-mix(in srgb, 0% var(--bg), 40% var(--fg));
 			font-weight: 100;
+		}
+	}
+
+	@media only screen and (max-width: 450px) {
+	}
+	@media only screen and (min-width: 450px) {
+		section {
+			margin-top: 0.75rem;
 		}
 	}
 </style>
