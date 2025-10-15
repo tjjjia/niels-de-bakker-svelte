@@ -55,8 +55,8 @@
 
 		if (
 			navigation.to.route.id   === "/projects/[id]" ||
-			navigation.from.route.id === "/projects/[id]" ||
 			navigation.to.route.id   === "/experiments/[id]" ||
+			navigation.from.route.id === "/projects/[id]" ||
 			navigation.from.route.id === "/experiments/[id]"
 		) {
 			crossfadeToggle = true;
@@ -64,6 +64,7 @@
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		} else {
 			setPreview({}); // clear image
+			crossfadeToggle = false;
 			navigationTimeout = 0;
 		}
 
