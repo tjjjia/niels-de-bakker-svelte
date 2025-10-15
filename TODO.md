@@ -1,13 +1,13 @@
 CMS
 
 - [ ] link disablen dat je naar pagina, file, etc. kan linken. ENKEL url (MT)
-- [ ] Admin rights (RV)
+- [x] Admin rights (RV)
 
 Font-end
 
 - [x] Video block heeft url teveel/extra (MT)
-- [ ] Header (MT)
-  - [ ] flippert (debouncer of safe zone?)
-  - [ ] ook binnen experiments moet die komen
+- [x] Header (MT)
+  - [x] flippert (debouncer of safe zone?)
+  - [x] ook binnen experiments moet die komen
 - [x] Closing projects > slide-out (MT)
-- [ ] Footnotes scrollt bij projects niet op juiste hoogte (scroll-margin) (RV)
+- [x] Footnotes scrollt bij projects niet op juiste hoogte (scroll-margin) (RV)

@@ -16,23 +16,13 @@
 	// let scrollIntoViewTimeout = durations.longest;
 
 	onMount(() => {
-		// compute threshold once DOM is stable
 		setTimeout(() => {
 			headerElement.scrollIntoView({
 				behavior: "smooth",
 				block: "start"
 			});
 
-			// threshold = top offset of headerElement + 0rem
-			// const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-			// headerScrollThreshold = getDocumentOffset(headerElement) + 0 * rem;
 		}, scrollIntoViewTimeout);
-
-		// window.addEventListener("scroll", scrollUpdate);
-
-		return () => {
-			// window.removeEventListener("scroll", scrollUpdate);
-		};
 	});
 </script>
 
@@ -42,11 +32,15 @@
 
 <main class="experiment--content column">
 	<header class="experiment--header" bind:this={headerElement}>
-		<div class="container">
+		<div class="container desktop-only">
 			<h1>{data.title}</h1>
 		</div>
 		<CloseButton href="/experiments" title="Back to Experiments" text="Close Experiment" />
 	</header>
+
+	<div class="mobile-only">
+		<h1>{data.title}</h1>
+	</div>
 
 	<KirbyLayout layouts={data.content} />
 
@@ -59,7 +53,7 @@
 	main {
 		margin-top: 2rem;
 	}
-	.experiment--header h1 {
+	h1 {
 		font-weight: 300;
 	}
 	:global(body) {

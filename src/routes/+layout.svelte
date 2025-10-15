@@ -47,40 +47,19 @@
 		console.log("going to", navigation.to.route.id);
 
 		if (
-			navigation.from.route.id === "/projects" &&
-			navigation.to.route.id   === "/projects/[id]"
+			navigation.from.route.id === "/experiments/[id]" ||
+			navigation.to.route.id   === "/experiments/[id]"
 		) {
-			crossfadeToggle = true;
-		} else if (
-			navigation.from.route.id === "/experiments/[id]" &&
-			navigation.to.route.id   === "/experiments"
-		) {
-			crossfadeToggle = true;
-		} else if (
-			navigation.from.route.id === "/experiments" &&
-			navigation.to.route.id === "/experiments/[id]"
-		) {
-			crossfadeToggle = true;
-		}  else if (
-			navigation.from.route.id === "/experiments/[id]" &&
-			navigation.to.route.id === "/experiments"
-		) {
-			crossfadeToggle = true;
-		} else {
-			crossfadeToggle = false;
+			setPreview({}); // clear image first
 		}
 
 		if (
-			navigation.to.route.id === "/projects/[id]" ||
-			navigation.from.route.id === "/projects/[id]"
-		) {
-			navigationTimeout = 1000;
-			window.scrollTo({ top: 0, behavior: "smooth" });
-		} else if (
-			navigation.to.route.id === "/experiments/[id]" ||
+			navigation.to.route.id   === "/projects/[id]" ||
+			navigation.from.route.id === "/projects/[id]" ||
+			navigation.to.route.id   === "/experiments/[id]" ||
 			navigation.from.route.id === "/experiments/[id]"
 		) {
-			setPreview({}); // clear image first
+			crossfadeToggle = true;
 			navigationTimeout = 1000;
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		} else {
@@ -94,10 +73,8 @@
 			navigation.cancel();
 
 			setTimeout(async () => {
-				// navigation.retry();
-				await goto(navigation.to.url.pathname); // resumes the canceled navigation
 				// console.log(`🟢 Navigating to ${navigation.to.url.pathname}`);
-
+				await goto(navigation.to.url.pathname); // resumes the canceled navigation
 				transitioningOut = false;
 			}, navigationTimeout);
 		}
@@ -119,19 +96,12 @@
 
 <figure class="preview">
 	{#if crossfadeToggle}
-		<!-- {#if preview.project.cover} -->
 		<img
 			src={preview.project.cover ? preview.project.cover.src : null}
 			srcset={preview.project.cover ? preview.project.cover.srcset : null}
 			alt={preview.project.cover ? preview.project.cover.alt : null}
 		/>
 	{/if}
-	<!-- {#if preview.project.title} -->
-	<!-- <figcaption> -->
-	<!-- {preview.project.title ?? null} -->
-	<!-- </figcaption> -->
-	<!-- {/if} -->
-	<!-- <div class="blockout"></div> -->
 </figure>
 
 <Navigation />
