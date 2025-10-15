@@ -116,6 +116,7 @@
 	:global([data-scrolldirection="down"]) {
 		nav {
 			opacity: 0;
+			pointer-events: none;
 		}
 	}
 

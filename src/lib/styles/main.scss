@@ -126,6 +126,22 @@ section.intro {
 	}
 }
 
+
+
+.desktop-only {
+	display: block;
+}
+.mobile-only {
+	display: none;
+}
+@media only screen and (max-width: 600px) {
+	.mobile-only {
+		display: block;
+	}
+	.desktop-only {
+		display: none;
+	}
+}
 /* Grid and Flex */
 .grid {
 	display: grid;
@@ -277,6 +293,8 @@ li.article:hover {
 	top: 0;
 	left: 0;
 	transform: scale(1.2);
+
+	background-color: var(--bg);
 }
 .preview figcaption,
 .project--cover figcaption {

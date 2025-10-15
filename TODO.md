@@ -5,14 +5,9 @@ CMS
 
 Font-end
 
-- [ ] Video block heeft url teveel/extra (MT)
-- [ ] Header (MT)
-  - [ ] flippert (debouncer of safe zone?)
-  - [ ] ook binnen experiments moet die komen
-- [ ] Closing projects > slide-out (MT)
-- [ ] Footnotes scrollt bij projects niet op juiste hoogte (scroll-margin) (RV)
-
-Styling
-
-- [ ] Mobile font size
-- [ ]
+- [x] Video block heeft url teveel/extra (MT)
+- [x] Header (MT)
+  - [x] flippert (debouncer of safe zone?)
+  - [x] ook binnen experiments moet die komen
+- [x] Closing projects > slide-out (MT)
+- [x] Footnotes scrollt bij projects niet op juiste hoogte (scroll-margin) (RV)

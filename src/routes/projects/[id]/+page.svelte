@@ -19,61 +19,19 @@
 	let scrollThreshold = 0.6;
 	let scrollIntoViewTimeout = durations.longest;
 
-	// control for hiding header .container
-	let hideHeaderContainer = $state(false);
-	// store the exact scroll threshold for hiding
-	let headerScrollThreshold = 0;
-	// buffer zone (hysteresis) to prevent flicker
-	const buffer = 8; // px, adjust as needed (e.g. 2rem)
-
-	function getDocumentOffset(el) {
-		const rect = el.getBoundingClientRect();
-		return rect.top + window.scrollY;
-	}
-
-	function scrollUpdate() {
-		const rect = mainElement.getBoundingClientRect();
-		const remaining = rect.y / window.innerHeight;
-
-		// existing blur logic
-		blurBackground = remaining < scrollThreshold;
-
-		// hysteresis logic: only flip when clearly past threshold +/- buffer
-		if (!hideHeaderContainer && window.scrollY > headerScrollThreshold + buffer) {
-			hideHeaderContainer = true;
-		} else if (hideHeaderContainer && window.scrollY < headerScrollThreshold - buffer) {
-			hideHeaderContainer = false;
-		}
-	}
-
 	onMount(() => {
 		setPreview(data);
+		document.documentElement.style.setProperty("--titlecolor", data.titlecolor);
 
-		document.documentElement.style.setProperty("--titlecolor",data.titlecolor);
-		
 		// compute threshold once DOM is stable
 		setTimeout(() => {
 			headerElement.scrollIntoView({
 				behavior: "smooth",
 				block: "start"
 			});
-
-			// threshold = top offset of headerElement + 0rem
-			const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-			headerScrollThreshold = getDocumentOffset(headerElement) + 0 * rem;
-
-			scrollUpdate();
 		}, scrollIntoViewTimeout);
-
-		window.addEventListener("scroll", scrollUpdate);
-
-		return () => {
-			window.removeEventListener("scroll", scrollUpdate);
-		};
 	});
 </script>
-
-<svelte:window onscroll={scrollUpdate} />
 
 <svelte:head>
 	<title>{data.author} | {data.title}</title>
@@ -87,10 +45,9 @@
 
 	<header
 		class="project--header"
-		class:hide-container={hideHeaderContainer}
 		bind:this={headerElement}
 	>
-		<div class="container">
+		<div class="container desktop-only">
 			<h1>{data.title}</h1>
 			<div class="project--meta-information">
 				{@html data.metainformation}
@@ -99,7 +56,15 @@
 		<CloseButton href="/projects" title="Back to Projects" text="Close Project" />
 	</header>
 
+	<div class="mobile-only">
+		<h1>{data.title}</h1>
+		<div class="project--meta-information">
+			{@html data.metainformation}
+		</div>
+	</div>
+
 	<KirbyLayout layouts={data.content} />
+
 	{#if data.footnotes}
 		{@html data.footnotes}
 	{/if}
