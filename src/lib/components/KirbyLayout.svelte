@@ -61,7 +61,9 @@
 {/each}
 
 <style>
-	section {
-		margin-top: 1rem;
+	@media only screen and (min-width: 450px) {
+		section {
+			margin-top: 1rem;
+		}
 	}
 </style>

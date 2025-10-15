@@ -66,8 +66,6 @@
 
 {#if !block.isHidden && url}
 	<section class="block">
-		{src}
-		{block.content.autoplay}
 		<figure>
 			{#if isVimeo}
 				<iframe

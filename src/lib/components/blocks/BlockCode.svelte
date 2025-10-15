@@ -31,8 +31,19 @@
 {/if}
 
 <style>
-	:global(code) {
-		font-family: var(--font-mono);
-		font-size: 1.1rem;
+	:global {
+		pre,
+		code {
+			font-family: var(--font-mono);
+		}
+
+		code {
+			font-size: 1rem;
+			max-width: calc(100vw - 2 * var(--body-padding));
+		}
+
+		pre {
+			margin-block: auto;
+		}
 	}
 </style>
