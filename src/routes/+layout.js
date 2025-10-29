@@ -1,5 +1,5 @@
 export const prerender = true;
-// export const trailingSlash = 'always';
+export const trailingSlash = 'always';
 // export const ssr = true;
 
 import { PUBLIC_KIRBY_DOMAIN } from "$env/static/public";
