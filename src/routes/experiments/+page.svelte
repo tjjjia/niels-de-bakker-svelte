@@ -19,7 +19,7 @@
 				<h2>{category.title}</h2>
 				{#each category.experiments as experiment}
 					<li class="article">
-						<a href={experiment.id}>{experiment.title}</a>
+						<a href={"/"+experiment.id}>{experiment.title}</a>
 						<!-- <sup class="article__tags">{experiment.tags}</sup> -->
 					</li>
 				{:else}

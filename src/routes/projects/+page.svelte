@@ -4,6 +4,8 @@
 
 	const projects = data.projects;
 
+	console.log( projects );
+
 	let previewProject = $state();
 	let previewImageElement = $state();
 
@@ -70,7 +72,7 @@
 					setPreview(project);
 				}}
 			>
-				<a href={project.id} title={project.title}>{project.title}</a>
+				<a href={"/"+project.id} title={project.title}>{project.title}</a>
 				<img class="background-image" src={project.cover.thumbnail} alt={project.cover.alt} />
 			</li>
 		{/each}
