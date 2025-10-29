@@ -1,0 +1,65 @@
+name: Rsync `/build` to Remote Server
+
+on:
+  push:
+    branches:
+      - main
+  repository_dispatch:
+    types: [manual-trigger]
+
+jobs:
+  deploy:
+    name: Rsync Deploy
+    runs-on: ubuntu-latest
+
+    env:
+      REMOTE_USER: ${{ vars.REMOTE_USER }}
+      REMOTE_HOST: ${{ vars.REMOTE_HOST }}
+      REMOTE_PATH: ${{ vars.REMOTE_PATH }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: npm
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: build
+      env:
+        PUBLIC_KIRBY_DOMAIN: ${{ vars.PUBLIC_KIRBY_DOMAIN }}
+      run: npm run build
+
+    - name: 🔑 Setup SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
+        ssh-keyscan -H "$REMOTE_HOST" >> ~/.ssh/known_hosts
+
+    - name: 📂 Sync via rsync
+      run: |
+        ADDITIONAL_EXCLUDES=".github .git"
+        
+        cp htaccess/.htaccess build/.htaccess
+        
+        EXCLUDES="--exclude=kirby "
+        while read -r pattern; do
+          [[ "$pattern" =~ ^#.*$ || -z "$pattern" ]] && continue
+          normalized_pattern=$(echo "$pattern" | sed 's|^/||' | sed 's|/*$||')
+          EXCLUDES+=" --exclude=$normalized_pattern"
+        done < .gitignore
+
+        for p in $ADDITIONAL_EXCLUDES; do
+          EXCLUDES+=" --exclude=$p"
+        done
+
+        echo "Starting rsync..."
+        rsync -rltcOzv --delete --progress $EXCLUDES \
+          -e "ssh -i ~/.ssh/deploy_key" \
+          build/ "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"
