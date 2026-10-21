@@ -96,7 +96,7 @@
 	page+layout data, so page-level fields like titlecolor are included.
 	*/
 	$effect(() => {
-		document.documentElement.style.setProperty(
+		document.body.style.setProperty(
 			"--titlecolor",
 			$page.data.titlecolor ?? "var(--fg)"
 		);

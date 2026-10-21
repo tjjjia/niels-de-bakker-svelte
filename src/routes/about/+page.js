@@ -11,5 +11,6 @@ export async function load({ params, fetch }) {
 		throw new Error('Failed to fetch data');
 	}
 
+	console.log(response);
 	return response.json();
 }

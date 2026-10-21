@@ -2,6 +2,7 @@
 	import { page } from "$app/state";
 
 	let path = $state(page.url.pathname);
+
 	$effect(() => {
 		path = page.url.pathname;
 		const themeValue = getValue(path);
@@ -12,18 +13,27 @@
 		return path.split("/").filter(Boolean)[0]; // gets part between first 2 slashes "/"
 	}
 
+	let navElement;
+	let dotElement;
+
 	const handleMouseEnter = function () {
 		// set to temp
 		const tempValue = getValue(this.pathname);
 		document.body.dataset.temporary = tempValue;
+		navElement.style.color = "var(--fg)";
+		dotElement.style.borderColor = "var(--fg)";
+
 	};
 	const handleMouseLeave = function () {
 		// set back to default
 		document.body.removeAttribute("data-temporary");
+		navElement.style.color = "var(--titlecolor)";
+		dotElement.style.borderColor = "var(--titlecolor)";
+
 	};
 </script>
 
-<nav id="menu--pages" class="menu">
+<nav id="menu--pages" class="menu" bind:this={navElement}>
 	<ul id="menu--pages-list">
 		<li class="menu--item" id="projects">
 			<a
@@ -42,7 +52,7 @@
 				onmouseenter={handleMouseEnter}
 				onmouseleave={handleMouseLeave}
 			>
-				<span class="dot">about</span>
+				<span class="dot" bind:this={dotElement}>about</span>
 			</a>
 		</li>
 		<li class="menu--item" id="experiments">
@@ -78,6 +88,7 @@
 			transition: transform var(--duration-normal) ease;
 			color: inherit;
 			text-decoration: none;
+
 		}
 	}
 

@@ -1,5 +1,5 @@
 <script>
-	/** @type {import('./$types').PageProps} */
+	/** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
 	import { PUBLIC_KIRBY_DOMAIN } from "$env/static/public";
 
