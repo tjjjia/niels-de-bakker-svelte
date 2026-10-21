@@ -15,7 +15,8 @@ const config = {
 		prerender: {
 			crawl: true,
 			entries: ["*"],
-			handleHttpError: "warn"
+			handleHttpError: "warn",
+			handleUnseenRoutes: "warn"
 		}
 	}
 };
