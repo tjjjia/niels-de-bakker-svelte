@@ -21,7 +21,6 @@
 
 	onMount(() => {
 		setPreview(data);
-		document.documentElement.style.setProperty("--titlecolor", data.titlecolor);
 
 		// compute threshold once DOM is stable
 		setTimeout(() => {

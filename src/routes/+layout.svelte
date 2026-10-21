@@ -89,6 +89,18 @@
 	onMount(() => {
 		lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 	});
+
+	/*
+	--titlecolor: re-evaluated on every route mount (initial load + client-side nav).
+	$page.data (not the layout's own `data` prop) is used because it's merged
+	page+layout data, so page-level fields like titlecolor are included.
+	*/
+	$effect(() => {
+		document.documentElement.style.setProperty(
+			"--titlecolor",
+			$page.data.titlecolor ?? "var(--fg)"
+		);
+	});
 </script>
 
 <svelte:head>

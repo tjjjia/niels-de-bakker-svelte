@@ -64,6 +64,7 @@
 		top: 0;
 		width: 100vw;
 		font-size: clamp(1.6rem, 2.3vw, 4rem);
+		color: var(--titlecolor);
 
 		ul {
 			display: flex;
@@ -100,7 +101,9 @@
 			display: flex;
 			height: clamp(1.3rem, 2vw, 4rem);
 			width: clamp(1.3rem, 2vw, 4rem);
-			border: clamp(0.15rem, 0.3vw, 0.5rem) solid var(--fg);
+			// border: clamp(0.15rem, 0.3vw, 0.5rem) solid var(--fg);
+			border: clamp(0.15rem, 0.3vw, 0.5rem) solid var(--titlecolor);
+			
 			font-size: 0; // hide accessibility text
 		}
 	}
