@@ -1,11 +1,9 @@
 // export const prerender = true;
-// export const trailingSlash = 'always';
-// export const ssr = true;
 
 import { PUBLIC_KIRBY_DOMAIN } from '$env/static/public';
 
-/** @type {import('./$types').LayoutServerLoad} */
-export async function load({ params }) {
+/** @type {import('./$types').PageLoad} */
+export async function load({ params, fetch }) {
 	const url = `${PUBLIC_KIRBY_DOMAIN}/about.json`;
 
 	const response = await fetch(url);
@@ -13,5 +11,5 @@ export async function load({ params }) {
 		throw new Error('Failed to fetch data');
 	}
 
-	return await response.json();
+	return response.json();
 }
