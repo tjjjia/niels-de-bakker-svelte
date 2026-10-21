@@ -6,7 +6,7 @@ import { PUBLIC_KIRBY_DOMAIN } from '$env/static/public';
 export async function load({ params, fetch }) {
 	const url = `${PUBLIC_KIRBY_DOMAIN}/projects/${params.id}.json`;
 
-	console.log('articles/[id]/+page.js: ', url);
+	// console.log('articles/[id]/+page.js: ', url);
 
 	const response = await fetch(url);
 	if (!response.ok) {

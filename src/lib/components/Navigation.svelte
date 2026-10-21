@@ -28,7 +28,7 @@
 		<li class="menu--item" id="projects">
 			<a
 				href="/projects"
-				aria-current={path === "/projects" ? "page" : false}
+				aria-current={getValue(path) === "projects" ? "page" : false}
 				onmouseenter={handleMouseEnter}
 				onmouseleave={handleMouseLeave}
 			>
@@ -38,7 +38,7 @@
 		<li class="menu--item" id="about">
 			<a
 				href="/about"
-				aria-current={path === "/about" ? "page" : false}
+				aria-current={getValue(path) === "about" ? "page" : false}
 				onmouseenter={handleMouseEnter}
 				onmouseleave={handleMouseLeave}
 			>
@@ -48,7 +48,7 @@
 		<li class="menu--item" id="experiments">
 			<a
 				href="/experiments"
-				aria-current={path === "/experiments" ? "page" : false}
+				aria-current={getValue(path) === "experiments" ? "page" : false}
 				onmouseenter={handleMouseEnter}
 				onmouseleave={handleMouseLeave}
 			>

@@ -4,7 +4,7 @@
 
 	const projects = data.projects;
 
-	console.log( projects );
+	// console.log( projects );
 
 	let previewProject = $state();
 	let previewImageElement = $state();
